@@ -1,0 +1,26 @@
+on:
+  push:
+    branches:
+      - master
+
+name: Deploy to Amazon EKS
+jobs:
+  deploy:
+    name: Deploy
+    runs-on: ubuntu-latest
+
+    env:
+      SERVER: "${{ secrets.SERVER }}"
+
+    steps:
+    - name: Checkout
+      uses: actions/checkout@v1
+
+    - name: executing remote ssh commands using password
+      uses: appleboy/ssh-action@master
+      with:
+        host: ${{ secrets.DEPLOY_HOST }}
+        username: ${{ secrets.SSH_USER }}
+        key: ${{ secrets.SSH_KEY }}
+        port: ${{ secrets.SSH_PORT }}
+        script: whoami
