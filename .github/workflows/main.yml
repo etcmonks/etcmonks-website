@@ -21,4 +21,4 @@ jobs:
         username: ${{ secrets.SSH_USER }}
         key: ${{ secrets.SSH_KEY }}
         port: ${{ secrets.SSH_PORT }}
-        script: "cd ${{ secrets.APP_DIR}}; git pull"
+        script: "cd ${{ secrets.APP_DIR}} && git pull && hugo -D"
